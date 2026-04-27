@@ -11,6 +11,8 @@ Pedro Henrique Alves da Silva
 /* Função que soma os 3 binários com uso das operações */
 int operacao(int bin1, int bin2, int bin3, int mm1, int mm2){
     int somabin, dig1, dig2, dig3;
+    int bin12[8];
+    int extra = 0;
 
     for(int i = 0; i<8; i++){
         dig1 = bin1 % 10;
@@ -27,6 +29,27 @@ int operacao(int bin1, int bin2, int bin3, int mm1, int mm2){
         bin2 = bin2 / 10;
         printf("digito 2: %d\n", dig2);
         
+        if(mm1 = '+'){
+            if(dig1 == 0 && dig2 == 0){
+                bin12[i] = 0 + extra;
+                extra = 0;
+            }
+                
+            if((dig1 == 1 && dig2 == 0) || (dig1 == 0 && dig2 == 1)){
+                if(extra == 1){
+                    bin12[i] = 0;
+                    extra = 1;
+                }
+                else
+                    bin12[i] = 1;
+            }
+                
+            if(dig1 == 1 && dig2 == 1){
+                bin12[i] = 0 + extra;
+                extra = 1;
+            }
+        }
+        
         dig3 = bin3 % 10;
         if(dig3 == 1){
             bin3--;
@@ -34,7 +57,7 @@ int operacao(int bin1, int bin2, int bin3, int mm1, int mm2){
         bin3 = bin3 / 10;
         printf("digito 3: %d\n\n", dig3);
         
-    }
+    
     
     /* Não pode simplesmente converter os 
     binários para inteiros correspondentes,
