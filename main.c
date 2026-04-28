@@ -12,7 +12,7 @@ Pedro Henrique Alves da Silva
 int somabin(int bin1, int bin2, int bin12[]){
     int dig1, dig2;
     int extra = 0, bin = 0;
-    int x = 10000000;
+    int x = 1;
     
     for(int i = 0; i<8; i++){
         dig1 = bin1 % 10;
@@ -48,9 +48,9 @@ int somabin(int bin1, int bin2, int bin12[]){
         }
     }
     
-    for(int i = 7; i>=0; i--){
+    for(int i=0; i<8; i++){
         bin = bin + bin12[i] * x;
-        x = x / 10;
+        x = x * 10;
     }
     
     return bin;
@@ -64,17 +64,15 @@ int operacao(int bin1, int bin2, int bin3, int mm1, int mm2){
     if(mm1 = '+'){
         bin22 = somabin(bin1, bin2, bin12);
     }
-    printf("%d", bin22);
     
-        
-        /*dig3 = bin3 % 10;
-        if(dig3 == 1){
-            bin3--;
-        }
-        bin3 = bin3 / 10;
-        printf("\ndigito 3: %d\n\n", dig3);*/
-        
+    /* Zera vetor */
+    for(int i = 0; i < 8; i++){
+        bin12[i] = 0;
+    }
     
+    if(mm2 = '+'){
+        soma = somabin(bin22, bin3, bin12);
+    }
     
     /* Não pode simplesmente converter os 
     binários para inteiros correspondentes,
@@ -145,7 +143,7 @@ int main()
         assim como também para hexadecimal. */
         
         contazero(bin1);
-        printf("\n%db (%di %dh)\n", bin1, inte1, hexa1);
+        printf("%db (%di %dh)\n", bin1, inte1, hexa1);
         printf("%c\n", mm1);
         contazero(bin2);
         printf("%db (%di %dh)\n", bin2, inte2, hexa2);
