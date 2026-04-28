@@ -8,54 +8,71 @@ Pedro Henrique Alves da Silva
 
 #include <stdio.h>
 
-/* Função que soma os 3 binários com uso das operações */
-int operacao(int bin1, int bin2, int bin3, int mm1, int mm2){
-    int somabin, dig1, dig2, dig3;
-    int bin12[8];
-    int extra = 0;
-
+/* Função para somar os dois binarios */
+int somabin(int bin1, int bin2, int bin12[]){
+    int dig1, dig2;
+    int extra = 0, bin = 0;
+    int x = 10000000;
+    
     for(int i = 0; i<8; i++){
         dig1 = bin1 % 10;
         if(dig1 == 1){
             bin1--;
         }
         bin1 = bin1 / 10;
-        printf("digito 1: %d\n", dig1);
         
         dig2 = bin2 % 10;
         if(dig2 == 1){
             bin2--;
         }
         bin2 = bin2 / 10;
-        printf("digito 2: %d\n", dig2);
         
-        if(mm1 = '+'){
-            if(dig1 == 0 && dig2 == 0){
-                bin12[i] = 0 + extra;
-                extra = 0;
-            }
+        
+        if(dig1 == 0 && dig2 == 0){
+            bin12[i] = 0 + extra;
+            extra = 0;
+        }
                 
-            if((dig1 == 1 && dig2 == 0) || (dig1 == 0 && dig2 == 1)){
-                if(extra == 1){
-                    bin12[i] = 0;
-                    extra = 1;
-                }
-                else
-                    bin12[i] = 1;
-            }
-                
-            if(dig1 == 1 && dig2 == 1){
-                bin12[i] = 0 + extra;
+        if((dig1 == 1 && dig2 == 0) || (dig1 == 0 && dig2 == 1)){
+            if(extra == 1){
+                bin12[i] = 0;
                 extra = 1;
             }
+            else
+                bin12[i] = 1;
         }
+                
+        if(dig1 == 1 && dig2 == 1){
+            bin12[i] = 0 + extra;
+            extra = 1;
+        }
+    }
+    
+    for(int i = 7; i>=0; i--){
+        bin = bin + bin12[i] * x;
+        x = x / 10;
+    }
+    
+    return bin;
+}
+
+/* Função que soma os 3 binários com uso das operações */
+int operacao(int bin1, int bin2, int bin3, int mm1, int mm2){
+    int soma, dig3, bin22;
+    int bin12[8];
         
-        dig3 = bin3 % 10;
+    if(mm1 = '+'){
+        bin22 = somabin(bin1, bin2, bin12);
+    }
+    printf("%d", bin22);
+    
+        
+        /*dig3 = bin3 % 10;
         if(dig3 == 1){
             bin3--;
         }
         bin3 = bin3 / 10;
-        printf("digito 3: %d\n\n", dig3);
+        printf("\ndigito 3: %d\n\n", dig3);*/
         
     
     
@@ -64,7 +81,7 @@ int operacao(int bin1, int bin2, int bin3, int mm1, int mm2){
     realizar a soma ou subtração entre eles e depois 
     converter o resultado para binário */
     
-    return somabin;
+    return soma;
 }
 
 /* Função que transforma um binario em decimal */
