@@ -56,23 +56,99 @@ int somabin(int bin1, int bin2, int bin12[]){
     return bin;
 }
 
+/* Função para subtrair os dois binarios */
+int subtbin(int bin1, int bin2, int bin12[]){
+    int dig1, dig2;
+    int extra = 0, bin = 0;
+    int x = 1;
+    
+    for(int i = 0; i<8; i++){
+        dig1 = bin1 % 10;
+        if(dig1 == 1){
+            bin1--;
+        }
+        bin1 = bin1 / 10;
+        
+        dig2 = bin2 % 10;
+        if(dig2 == 1){
+            bin2--;
+        }
+        bin2 = bin2 / 10;
+        
+        
+        if(dig1 == 0 && dig2 == 0){
+            if(extra == 1){
+                bin12[i] = 1;
+                extra = 1;
+            }
+            else
+                bin12[i] = 0;
+        }
+                
+        if(dig1 == 0 && dig2 == 1){
+            if(extra == 1){
+                bin12[i] = 0;
+                extra = 0;
+            }
+            else{
+                bin12[i] = 1;
+                extra = 1;
+            }
+        }
+        
+        if(dig1 == 1 && dig2 == 0){
+            if(extra == 1){
+                bin12[i] = 0;
+                extra = 0;
+            }
+            else
+                bin12[i] = 1;
+        }
+                
+        if(dig1 == 1 && dig2 == 1){
+            if(extra == 1){
+                bin12[i] = 1;
+                extra = 0;
+            }
+            else
+                bin12[i] = 0;
+        }
+    }
+    
+    for(int i=0; i<8; i++){
+        bin = bin + bin12[i] * x;
+        x = x * 10;
+        printf("valor[%d]: %d\n", i, bin12[i]);
+    }
+    
+    return bin;
+}
+
 /* Função que soma os 3 binários com uso das operações */
 int operacao(int bin1, int bin2, int bin3, int mm1, int mm2){
     int soma, dig3, bin22;
     int bin12[8];
         
-    if(mm1 = '+'){
+    if(mm1 == '+'){
         bin22 = somabin(bin1, bin2, bin12);
     }
+    else{
+        bin22 = subtbin(bin1, bin2, bin12);
+    }
     
+    printf("\n1º resultado: %d\n", bin22);
     /* Zera vetor */
     for(int i = 0; i < 8; i++){
         bin12[i] = 0;
     }
     
-    if(mm2 = '+'){
+    if(mm2 == '+'){
         soma = somabin(bin22, bin3, bin12);
     }
+    else{
+        soma = subtbin(bin22, bin3, bin12);
+    }
+    printf("\n2º resultado: %d\n", soma);
     
     /* Não pode simplesmente converter os 
     binários para inteiros correspondentes,
