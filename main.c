@@ -137,8 +137,19 @@ int operacao(int bin1, int bin2, int bin3, int mm1, int mm2){
 
 /* Função que transforma um binario em decimal */
 int bin_inte(int bin){
-    int decimal;
+    int decimal = 0;
+    int base = 1;
+
+    while(bin != 0){
+        decimal = decimal + (bin % 10) * base;
+        base = base * 2;
+        bin = bin / 10;
+    }
     
+    if(decimal >= 128){
+        decimal = decimal - 256;
+    }
+
     return decimal;
 }
 
