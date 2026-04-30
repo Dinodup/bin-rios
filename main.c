@@ -200,6 +200,9 @@ int main()
         hexa2 = bin_hex(bin2);
         hexa3 = bin_hex(bin3);
         
+        inteF = bin_inte(binF);
+        hexaF = bin_hex(binF);
+        
         /* No caso de ocorrência de OVERFLOW o resultado 
         da operação deve conter apenas os 8 bits menos 
         significativos com sua devida conversão para inteiro 
