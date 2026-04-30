@@ -59,10 +59,10 @@ int somabin(int bin1, int bin2, int bin12[]){
 /* Função para subtrair os dois binarios */
 int subtbin(int bin1, int bin2, int bin12[]){
     int dig1, dig2;
-    int extra = 0, bin = 0;
+    int emprestimo = 0, bin = 0;
     int x = 1;
     
-    for(int i = 0; i<8; i++){
+    for(int i=0; i<8; i++){
         dig1 = bin1 % 10;
         if(dig1 == 1){
             bin1--;
@@ -75,50 +75,27 @@ int subtbin(int bin1, int bin2, int bin12[]){
         }
         bin2 = bin2 / 10;
         
+        int sub = dig1 - dig2 - emprestimo;
         
-        if(dig1 == 0 && dig2 == 0){
-            if(extra == 1){
-                bin12[i] = 1;
-                extra = 1;
-            }
-            else
-                bin12[i] = 0;
+        if(sub == -1){
+            bin12[i] = 1;
+            emprestimo = 1;
         }
-                
-        if(dig1 == 0 && dig2 == 1){
-            if(extra == 1){
+        else{
+            if(sub == -2){
                 bin12[i] = 0;
-                extra = 0;
+                emprestimo = 1;
             }
             else{
-                bin12[i] = 1;
-                extra = 1;
+                bin12[i] = sub;
+                emprestimo = 0;
             }
-        }
-        
-        if(dig1 == 1 && dig2 == 0){
-            if(extra == 1){
-                bin12[i] = 0;
-                extra = 0;
-            }
-            else
-                bin12[i] = 1;
-        }
-                
-        if(dig1 == 1 && dig2 == 1){
-            if(extra == 1){
-                bin12[i] = 1;
-                extra = 0;
-            }
-            else
-                bin12[i] = 0;
         }
     }
     
-    for(int i=0; i<8; i++){
+    for(int i = 0; i < 8; i++){
         bin = bin + bin12[i] * x;
         x = x * 10;
-        printf("valor[%d]: %d\n", i, bin12[i]);
     }
     
     return bin;
